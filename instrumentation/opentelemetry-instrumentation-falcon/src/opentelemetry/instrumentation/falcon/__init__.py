@@ -149,7 +149,7 @@ class _InstrumentedFalconAPI(falcon.API):
         if not isinstance(middlewares, (list, tuple)):
             middlewares = [middlewares]
 
-        self._tracer = trace.get_tracer(__name__, __version__)
+        self._tracer = trace.get_tracer(__name__, __version__, kwargs.pop("tracer_provider", None))
         trace_middleware = _TraceMiddleware(
             self._tracer,
             kwargs.pop("traced_request_attributes", None),
